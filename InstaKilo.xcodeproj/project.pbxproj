@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		627A7B031D92F6250032A7FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B021D92F6250032A7FA /* main.m */; };
 		627A7B061D92F6250032A7FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B051D92F6250032A7FA /* AppDelegate.m */; };
-		627A7B091D92F6250032A7FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B081D92F6250032A7FA /* ViewController.m */; };
 		627A7B0C1D92F6250032A7FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 627A7B0A1D92F6250032A7FA /* Main.storyboard */; };
 		627A7B0E1D92F6250032A7FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627A7B0D1D92F6250032A7FA /* Assets.xcassets */; };
 		627A7B111D92F6250032A7FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 627A7B0F1D92F6250032A7FA /* LaunchScreen.storyboard */; };
+		627A7B1A1D92F6E60032A7FA /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B191D92F6E60032A7FA /* CollectionViewController.m */; };
+		627A7B1D1D92F7830032A7FA /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B1C1D92F7830032A7FA /* CustomCollectionViewCell.m */; };
+		627A7B201D9304A40032A7FA /* SectionCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B1F1D9304A40032A7FA /* SectionCollectionReusableView.m */; };
+		627A7B231D930B910032A7FA /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 627A7B221D930B910032A7FA /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +23,18 @@
 		627A7B021D92F6250032A7FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		627A7B041D92F6250032A7FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		627A7B051D92F6250032A7FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		627A7B071D92F6250032A7FA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		627A7B081D92F6250032A7FA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		627A7B0B1D92F6250032A7FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		627A7B0D1D92F6250032A7FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		627A7B101D92F6250032A7FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		627A7B121D92F6250032A7FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		627A7B181D92F6E60032A7FA /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		627A7B191D92F6E60032A7FA /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		627A7B1B1D92F7830032A7FA /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
+		627A7B1C1D92F7830032A7FA /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		627A7B1E1D9304A40032A7FA /* SectionCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionCollectionReusableView.h; sourceTree = "<group>"; };
+		627A7B1F1D9304A40032A7FA /* SectionCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionCollectionReusableView.m; sourceTree = "<group>"; };
+		627A7B211D930B910032A7FA /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		627A7B221D930B910032A7FA /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +69,15 @@
 			children = (
 				627A7B041D92F6250032A7FA /* AppDelegate.h */,
 				627A7B051D92F6250032A7FA /* AppDelegate.m */,
-				627A7B071D92F6250032A7FA /* ViewController.h */,
-				627A7B081D92F6250032A7FA /* ViewController.m */,
+				627A7B181D92F6E60032A7FA /* CollectionViewController.h */,
+				627A7B191D92F6E60032A7FA /* CollectionViewController.m */,
 				627A7B0A1D92F6250032A7FA /* Main.storyboard */,
+				627A7B1B1D92F7830032A7FA /* CustomCollectionViewCell.h */,
+				627A7B1C1D92F7830032A7FA /* CustomCollectionViewCell.m */,
+				627A7B1E1D9304A40032A7FA /* SectionCollectionReusableView.h */,
+				627A7B1F1D9304A40032A7FA /* SectionCollectionReusableView.m */,
+				627A7B211D930B910032A7FA /* Photo.h */,
+				627A7B221D930B910032A7FA /* Photo.m */,
 				627A7B0D1D92F6250032A7FA /* Assets.xcassets */,
 				627A7B0F1D92F6250032A7FA /* LaunchScreen.storyboard */,
 				627A7B121D92F6250032A7FA /* Info.plist */,
@@ -149,9 +164,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				627A7B091D92F6250032A7FA /* ViewController.m in Sources */,
+				627A7B231D930B910032A7FA /* Photo.m in Sources */,
+				627A7B201D9304A40032A7FA /* SectionCollectionReusableView.m in Sources */,
 				627A7B061D92F6250032A7FA /* AppDelegate.m in Sources */,
 				627A7B031D92F6250032A7FA /* main.m in Sources */,
+				627A7B1A1D92F6E60032A7FA /* CollectionViewController.m in Sources */,
+				627A7B1D1D92F7830032A7FA /* CustomCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

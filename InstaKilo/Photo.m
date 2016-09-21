@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  Photo.m
 //  InstaKilo
 //
 //  Created by Cay Cornelius on 21/09/16.
 //  Copyright © 2016 Cornelius.Media. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "Photo.h"
 
-@interface ViewController : UIViewController
-
+@implementation Photo
 
 @end
-
