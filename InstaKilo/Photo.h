@@ -14,5 +14,6 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *subject;
+@property (nonatomic, strong) NSString *location;
 
 @end
