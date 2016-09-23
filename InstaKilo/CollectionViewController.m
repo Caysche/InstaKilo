@@ -16,7 +16,6 @@
 @interface CollectionViewController ()
 
 @property (nonatomic) NSMutableArray *imagesArray;
-@property (nonatomic) NSMutableArray *imageSectionTitlesArray;
 @property (nonatomic) NSString *sortMode;
 @property (nonatomic) NSMutableSet *subjectsSet;
 @property (nonatomic) NSMutableArray *subjects;
@@ -24,6 +23,8 @@
 @property (nonatomic) NSMutableArray *locations;
 @property (nonatomic) NSMutableArray *locationsFinal;
 @property (nonatomic) NSMutableArray *subjectsFinal;
+@property (nonatomic) NSTimeInterval lastClick;
+@property (nonatomic) NSIndexPath *lastIndexPath;
 
 @end
 
@@ -169,9 +170,14 @@ static NSString * const reuseIdentifier = @"Cell";
     kiel5.subject = @"Kiel";
     kiel5.location = @"Kiel Holtenau";
 
-    self.imagesArray = [@[berlin1, berlin2, berlin3, berlin4, berlin5, kiel1, kiel2, kiel3, kiel4, kiel5] mutableCopy];
+    if (!self.imagesArray) {
+        self.imagesArray = [@[berlin1, berlin2, berlin3, berlin4, berlin5, kiel1, kiel2, kiel3, kiel4, kiel5] mutableCopy];
+    }
     
-    self.imageSectionTitlesArray = [@[@"Berlin", @"Kiel"] mutableCopy];
+    [self setUpSortArrays];
+}
+
+- (void)setUpSortArrays {
     
     self.subjectsSet = [[NSMutableSet alloc] init];
     self.locationsSet = [[NSMutableSet alloc] init];
@@ -222,22 +228,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         [self.locationsFinal addObject:intermediateArray];
     }
-    
-//    for (NSString *location in self.locationsSet) {
-//        for (Photo *photo in self.imagesArray) {
-//            if ([location isEqualToString:photo.location]) {
-//                self.locations addObject:<#(nonnull id)#>
-//            }
-//        }
-//
-//    }
-//    
-//    for (NSString *location in self.locationsSet) {
-//        if (location ==  containsObject:photo.location]) {
-//            [self.locations addObject:photo.location];
-//        }
-//        [self.locations indexOfObject:<#(nonnull id)#>]
-//    }
+
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -268,7 +259,7 @@ static NSString * const reuseIdentifier = @"Cell";
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"imageCell" forIndexPath:indexPath];
     
     // Configure the cell
-    Photo *photoObject = [[Photo alloc] init];;
+    Photo *photoObject = [[Photo alloc] init];
     if ([self.sortMode isEqualToString:@"Subject"]) {
         photoObject = self.subjectsFinal[indexPath.section][indexPath.row];
     } else if ([self.sortMode isEqualToString:@"Location"]) {
@@ -295,74 +286,35 @@ static NSString * const reuseIdentifier = @"Cell";
     return view;
 }
 
-
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-//    return [self.imagesArray count];
-//}
-//
-//
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    NSArray *sectionArray = self.imagesArray[section];
-//    return [sectionArray count];
-//}
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"imageCell" forIndexPath:indexPath];
-//    
-//    // Configure the cell
-//    Photo *photoObject = self.imagesArray[indexPath.section][indexPath.row];
-//    cell.imageView.image = photoObject.image;
-//    // cell.imageView.image = [self.imageArray objectAtIndex:indexPath.item];
-//    
-//    return cell;
-//}
-//
-//-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//    
-//    SectionCollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"sectionTitle" forIndexPath:indexPath];
-//    
-//    Photo *photoObject = self.imagesArray[indexPath.section][indexPath.row];
-//    
-//    if ([photoObject.subject  isEqual: @"Berlin"]) {
-//        view.sectionTitle.text = @"Berlin";
-//    } else if ([photoObject.subject  isEqual: @"Kiel"]) {
-//        view.sectionTitle.text = @"Kiel";
-//    }
-//    
-//    return view;
-//}
 #pragma mark <UICollectionViewDelegate>
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 - (IBAction)pressedSort:(UIBarButtonItem *)sender {
     self.sortMode = ([self.sortMode  isEqual: @"Subject"]) ? @"Location" : @"Subject";
+    [self.collectionView reloadData];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSTimeInterval now = [[[NSDate alloc] init] timeIntervalSince1970];
+    if ((now - self.lastClick < 0.3) && [indexPath isEqual:self.lastIndexPath]) {
+        // Double tap here
+        [self removeItem:indexPath];
+    }
+    self.lastClick = now;
+    self.lastIndexPath = indexPath;
+}
+
+#pragma mark - Helper Methods
+
+- (void)removeItem:(NSIndexPath *)indexPath {
+    Photo *photoObject = [[Photo alloc] init];
+    if ([self.sortMode isEqualToString:@"Subject"]) {
+        photoObject = self.subjectsFinal[indexPath.section][indexPath.row];
+        [self.imagesArray removeObject:photoObject];
+    } else if ([self.sortMode isEqualToString:@"Location"]) {
+        photoObject = self.locationsFinal[indexPath.section][indexPath.row];
+        [self.imagesArray removeObject:photoObject];
+    }
+    [self setUpSortArrays];
     [self.collectionView reloadData];
 }
 
